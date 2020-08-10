@@ -20,10 +20,11 @@ from django.contrib.auth import views as auth_view
 from django.conf.urls.static import static
 from django.conf import settings
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('todo/', include('todo.urls', namespace='todo')),
-    path('accounts/',include('django.contrib.auth.urls')),
+    path('login/', auth_view.LoginView.as_view(), name='login'),
+    path('logout', auth_view.LogoutView.as_view(), name='logout'),
+    path('admin/', admin.site.urls),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
