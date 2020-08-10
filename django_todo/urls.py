@@ -22,8 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('login', auth_view.LoginView.as_view(), name='login'),
-    path('logout',auth_view.LogoutView.as_view(), name= 'logout'),
+    path('accounts/',include('allauth.urls')),
     path('todo/', include('todo.urls', namespace='todo')),
 ]
 

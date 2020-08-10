@@ -47,7 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # third party
-    'todo'
+    'todo',
+    'allauth',
+    'allauth.account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -162,3 +165,22 @@ TODO_ALLOWED_FILE_ATTACHMENTS = [".jpg", ".gif", ".csv", ".pdf", ".zip"]
 TODO_MAXIMUM_ATTACHMENT_SIZE = 5000000  # In bytes
 
 TODO_DEFAULT_LIST_SLUG = 'tickets'
+
+
+
+# django allauth configurations
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGIN_REDIRECT = 'home'
+
+
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 10
+
+
+# crispy forms template pack
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
