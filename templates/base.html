@@ -14,30 +14,38 @@
 <body>
 	<header>
 		<!-- Fixed navbar -->
-		<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-			<a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">DJANGO-TODO</a>
-			<nav class="my-2 my-md-0 mr-md-3">
-				{% if user.is_authenticated %} 
-				<a href="{% url 'todo:lists' %}" class="p-2 text-dark">To-do Lists</a>
-				<a href="{% url 'todo:mine' %}" class="p-2 text-dark">My Tasks</a>
-				<a href="{% url 'logout' %}" class="p-2 text-dark">Log Out</a>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		  <a class="navbar-brand" href="/">django-todo</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+			  {% if user.is_authenticated %}
+				<li class="nav-item"><a href="{% url 'todo:lists' %}" class="nav-link">To-do Lists</a></li>
+				<li class="nav-item"><a href="{% url 'todo:mine' %}" class="nav-link">My Tasks</a></li>
+				<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
 				{# Simulate external user adding ticket #}
-				<a href="{% url 'todo:external_add' %}" class="p-2 text-dark">File Ticket</a>
-				<a href="{% url 'todo:import_csv' %}" class="p-2 text-dark">Import</a>
-				{% else %}
-				<a href="{% url 'login' %}" class="nav-link">Log In</a>
-				{% endif %}
-
-				{% if user.is_authenticated %}
-				<form class="form-inline mt-2 mt-md-0" action="{% url 'todo:search' %}" method="get" placeholder="Search" aria-label="Search">
+				<li class="nav-item"><a href="{% url 'todo:external_add' %}" class="nav-link">File Ticket</a></li>
+				<li class="nav-item"><a href="{% url 'todo:import_csv' %}" class="nav-link">Import</a></li>
+  
+			  {% else %}
+				<li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
+			  {% endif %}
+			</ul>
+  
+			{% if user.is_authenticated %}
+				  <form class="form-inline mt-2 mt-md-0" action="{% url 'todo:search' %}" method="get" placeholder="Search" aria-label="Search">
 				<input type="text" name="q" value="" class="form-control mr-sm-2" id="q">
 				<input type="submit" value="Search Tasks" class="btn btn-outline-success my-2 my-sm-0">
-				</form>
-				{% endif %}
-			</nav>
-		</div>
-	</header>
-		<main role="main" class="container">
+			  </form>
+			{% endif %}
+  
+		  </div>
+		</nav>
+	  </header>
+	  <br>
+		<main role="main" class="container mt-5">
 			{% if messages %}
 				{% for message in messages %}
 				<div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
